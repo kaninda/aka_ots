@@ -1,0 +1,42 @@
+
+global:
+  ingress:
+    enabled: false
+  route:
+    enabled: true
+    host: otds.apps-crc.testing
+
+database:
+  automaticDatabaseCreation:
+    name: bitnami/postgresql
+    dbAdmin:
+      username: postgres
+      password: postgres
+    dbName: otdsdb
+    dbUser: otdsuser
+    dbPassword: otdspassword
+
+otdsws:
+  enabled: true
+
+  otdsdb:
+    username: otdsuser
+    password: otdspassword
+    name: otdsdb
+    url: jdbc:postgresql://otds-postgresql:5432/otdsdb
+
+  config:
+    adminUser: admin
+    adminPassword: admin456  # légèrement modifié
+
+  cryptKey: "CHANGEME123456789X"  # légèrement modifié
+
+  securityContextOverride:
+    runAsUser: null
+    runAsGroup: null
+    fsGroup: null
+
+  containerSecurityContext:
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false
