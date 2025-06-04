@@ -5,6 +5,7 @@ global:
   route:
     enabled: true
     host: otds.apps-crc.testing
+  imagePullSecret: opentext-registry-secret
 
 database:
   automaticDatabaseCreation:

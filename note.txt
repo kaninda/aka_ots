@@ -1,0 +1,30 @@
+
+//Installation avec Helm
+helm upgrade --install otds ./aka_ots -n opentext --create-namespace -f aka_ots/min-value.yaml
+
+// Verification des manifeste
+helm get manifest otds -n opentext
+
+
+OpenShift CRC impose une politique de sécurité stricte (SCC "restricted").
+Mais OTDS essaie de démarrer le pod avec :
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+
+ // desinstallation
+ helm uninstall otds -n opentext
+
+
+ // suppression de toutes les installations
+  oc delete all --all -n opentext
+
+  // Creations des secrets
+  oc create secret docker-registry opentext-registry-secret \
+    --docker-server=registry.opentext.com \
+    --docker-username=julien.visinand@bcv.ch \
+    --docker-password=p00Od06^pu+U \
+    --docker-email=julien.visinand@bcv.ch \
+    -n opentext
